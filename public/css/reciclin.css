@@ -1,0 +1,787 @@
+/* ==================================================================== */
+/* RECICLIN.COM - ESTILOS PRINCIPALES                                  */
+/* ==================================================================== */
+
+/* ---------------------------------------------------------------------- */
+/* AISLAMIENTO CSS: Todos los estilos usan el selector #barra-reciclin    */
+/* Esto evita conflictos con otros elementos de tu página web.             */
+/* ---------------------------------------------------------------------- */
+
+#barra-reciclin *,
+#barra-reciclin *::before,
+#barra-reciclin *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+#barra-reciclin .header {
+    background: linear-gradient(90deg, #1a237e 0%, #1565c0 15%, #0d47a1 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+#barra-reciclin .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+}
+
+/* Contenedor izquierdo: INICIO + JUEGOS/VIDEOS/BLOG/RANKING */
+#barra-reciclin .left-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#barra-reciclin .inicio-btn {
+    background: #1565c0;
+    color: white;
+    padding: 15px 25px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#barra-reciclin .inicio-btn:hover {
+    background: #0d47a1;
+}
+
+/* Contenedor de navegación (Juegos, Videos, Blog, Ranking) */
+#barra-reciclin .main-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ITEMS DE NAVEGACIÓN */
+#barra-reciclin .nav-item {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+#barra-reciclin .nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Iconos de navegación */
+#barra-reciclin .nav-item.juegos::before { content: '🎮'; }
+#barra-reciclin .nav-item.videos::before { content: '📺'; }
+#barra-reciclin .nav-item.blog::before { content: '📝'; }
+
+/* ESTILO PARA RANKING */
+#barra-reciclin .logo-central {
+    background: linear-gradient(135deg, #5e35b1, #311b92);
+    padding: 8px 20px;
+    border-radius: 50px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    font-size: 14px;
+}
+#barra-reciclin .logo-central::before { content: '🏆'; font-size: 24px; }
+#barra-reciclin .logo-central::after { content: '📈'; font-size: 20px; }
+
+
+/* CONTENEDOR CENTRAL DEL LOGO */
+#barra-reciclin .centered-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+#barra-reciclin .custom-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Contenedor derecho: GRANDES IDEAS + ACCIÓN */
+#barra-reciclin .right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* LOGO DERECHA - Grandes Ideas */
+#barra-reciclin .brand-logo {
+    background: white;
+    padding: 8px 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: #1a237e;
+    font-size: 14px;
+}
+#barra-reciclin .brand-logo::before { content: '💡'; font-size: 18px; }
+
+/* ESTILOS DE BOTONES DE ACCIÓN */
+#barra-reciclin .action-btn {
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 13px;
+    color: #1a237e;
+}
+#barra-reciclin .action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#barra-reciclin .btn-historietas { background: linear-gradient(135deg, #ff9800, #ff5722); color: white; display: flex; align-items: center; gap: 5px; }
+#barra-reciclin .btn-historietas::before { content: '📖'; }
+#barra-reciclin .btn-evidencias { background: linear-gradient(135deg, #66bb6a, #2e7d32); color: white; }
+#barra-reciclin .btn-sesion { background: linear-gradient(135deg, #29b6f6, #0288d1); color: white; display: flex; align-items: center; gap: 5px; }
+#barra-reciclin .btn-sesion::before { content: '👤'; }
+
+#barra-reciclin .search-btn { display: none; }
+
+#barra-reciclin .mobile-menu {
+    display: none;
+    background: white;
+    color: #1a237e;
+    border: none;
+    padding: 10px 15px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#barra-reciclin .mobile-nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: #0d47a1;
+    padding: 20px;
+    gap: 10px;
+}
+
+#barra-reciclin .mobile-nav.active {
+    display: flex;
+}
+
+/* Responsive: Ocultar escritorio y mostrar móvil */
+@media (max-width: 992px) {
+    #barra-reciclin .nav-container {
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    #barra-reciclin .left-group,
+    #barra-reciclin .right-section,
+    #barra-reciclin .centered-logo {
+        display: none;
+    }
+
+    #barra-reciclin .mobile-menu {
+        display: block;
+    }
+
+    /* Ajuste de elementos en el menú móvil */
+    #barra-reciclin .mobile-nav .nav-item,
+    #barra-reciclin .mobile-nav .logo-central,
+    #barra-reciclin .mobile-nav .brand-logo,
+    #barra-reciclin .mobile-nav img.custom-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 5px 0;
+    }
+
+    /* LOGO EN MÓVIL AL 100% (ajustado para que sea visible) */
+    #barra-reciclin .mobile-nav img.custom-logo {
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+        margin: 15px auto;
+    }
+}
+
+/* ======================================================================= */
+/* SECCIÓN DE TEXTO DESTACADO */
+/* ======================================================================= */
+.text-block-container {
+    max-width: 800px;
+    margin: 30px auto;
+    text-align: center;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.plataform-text {
+    font-size: 1.5em;
+    margin: 0;
+    display: inline-block;
+    text-align: center;
+}
+
+.highlight {
+    background-color: #90EE90;
+    padding: 3px 8px;
+    border-radius: 5px;
+    display: inline-block;
+    white-space: normal;
+}
+
+/* ======================================================================= */
+/* ESTILOS DE LA SECCIÓN DE SLIDES DE VIDEOS */
+/* ======================================================================= */
+
+#seccion-videos-slide-final * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#seccion-videos-slide-final {
+    padding: 0;
+    background-color: #121212;
+}
+
+/* Contenedor principal y Tarjeta de Video */
+#seccion-videos-slide-final .swiper-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+}
+
+#seccion-videos-slide-final .video-card {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 80vh;
+    min-height: 450px;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#seccion-videos-slide-final .video-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    filter: brightness(0.85);
+}
+
+#seccion-videos-slide-final .video-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: linear-gradient(
+        to top,
+        rgba(13, 71, 161, 0.9) 0%,
+        rgba(33, 150, 243, 0.3) 50%,
+        transparent 90%
+    );
+    color: white;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 60px 80px;
+    text-align: left;
+}
+
+#seccion-videos-slide-final .tag {
+    background-color: #00A2E8;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: inline-block;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+#seccion-videos-slide-final h3 {
+    font-size: 3.5vw;
+    min-font-size: 36px;
+    max-width: 900px;
+    margin: 0;
+    line-height: 1.1;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 1);
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+#seccion-videos-slide-final p.subtitulo {
+    font-size: 18px;
+    margin-top: 10px;
+    max-width: 700px;
+    color: #CFD8DC;
+    font-weight: 400;
+    line-height: 1.4;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Animaciones */
+#seccion-videos-slide-final .video-overlay > * {
+    opacity: 0;
+    animation: slideInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+#seccion-videos-slide-final .tag { animation-delay: 0.2s; }
+#seccion-videos-slide-final h3 { animation-delay: 0.4s; }
+#seccion-videos-slide-final p.subtitulo { animation-delay: 0.6s; }
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(20px); filter: blur(3px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* Flechas de Navegación */
+#seccion-videos-slide-final .swiper-button-prev,
+#seccion-videos-slide-final .swiper-button-next {
+    background-color: #00A2E8;
+    color: #FFFFFF;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease-in-out;
+    z-index: 10;
+}
+
+#seccion-videos-slide-final .swiper-button-prev:hover,
+#seccion-videos-slide-final .swiper-button-next:hover {
+    background-color: #0D47A1;
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+#seccion-videos-slide-final .swiper-button-prev::after,
+#seccion-videos-slide-final .swiper-button-next::after {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Paginación (puntos) */
+#seccion-videos-slide-final .swiper-pagination {
+    bottom: 30px !important;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 3;
+}
+
+#seccion-videos-slide-final .swiper-pagination-bullet {
+    background-color: #FFFFFF;
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
+}
+
+#seccion-videos-slide-final .swiper-pagination-bullet-active {
+    background-color: #00A2E8;
+    opacity: 1;
+    width: 12px;
+    height: 12px;
+}
+
+/* Responsive Videos */
+@media (max-width: 768px) {
+    #seccion-videos-slide-final .video-card {
+        height: 60vh;
+    }
+    #seccion-videos-slide-final .video-overlay {
+        padding: 30px;
+    }
+    #seccion-videos-slide-final h3 {
+        font-size: 28px;
+    }
+    #seccion-videos-slide-final .swiper-button-prev,
+    #seccion-videos-slide-final .swiper-button-next {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ======================================================================= */
+/* DASHBOARD Y RANKING */
+/* ======================================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+}
+
+.dashboard-wrapper {
+    font-family: 'Inter', sans-serif;
+    padding: 30px;
+    box-sizing: border-box;
+    max-width: 1150px;
+    margin: 30px auto;
+    background-color: #f7f9fb;
+    border-radius: 12px;
+    border: 1px solid #e0e6ed;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 30px;
+}
+
+.seccion-titulo {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #38c172;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.tarjeta {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    transition: box-shadow 0.3s ease;
+}
+
+.btn-actualizar {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.btn-actualizar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-actualizar:active {
+    transform: translateY(0);
+}
+
+.btn-actualizar.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Métricas */
+.metricas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.metrica-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #ebf9f0;
+    border-radius: 8px;
+    border: 1px solid #d4edda;
+    min-height: 80px;
+}
+
+.metrica-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.metrica-icon {
+    font-size: 1.5em;
+    margin-right: 8px;
+    color: #38c172;
+}
+
+.metrica-label {
+    color: #555;
+    font-weight: 600;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.metrica-valor {
+    font-size: 1.6em;
+    font-weight: 800;
+    color: #2c3e50;
+    line-height: 1.1;
+}
+
+.metrica-card:nth-child(3) .metrica-icon { color: #00bcd4; }
+.metrica-card:nth-child(4) .metrica-icon { color: #ff9800; }
+
+/* Ranking */
+.ranking-lista { list-style: none; padding: 0; margin: 0; }
+.ranking-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background-color: #f7f9fb;
+    border-left: 5px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+.ranking-item.destacado { background-color: #e6fff0; border-left-color: #4CAF50; }
+.ranking-item:hover { background-color: #ebf9f0; border-left-color: #38c172; }
+
+.rank-nick { font-weight: 700; color: #2c3e50; flex-grow: 1; min-width: 120px; }
+.rank-data { font-weight: 800; color: #38c172; font-size: 1em; width: 100px; text-align: right; margin-left: 15px; }
+.rank-data.total { color: #00bcd4; font-weight: 600; width: 80px; }
+
+/* Medallas */
+.posicion-icon-wrapper {
+    width: 35px; height: 35px; margin-right: 15px; line-height: 35px; text-align: center; border-radius: 50%;
+    font-weight: 800; font-size: 0.9em; color: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.posicion-icon-wrapper.gold {
+    background-color: #FFD700;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5), 0 2px 5px rgba(255, 215, 0, 0.5);
+    color: #333;
+}
+.posicion-icon-wrapper.silver {
+    background-color: #C0C0C0;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5), 0 2px 5px rgba(192, 192, 192, 0.5);
+}
+.posicion-icon-wrapper.bronze {
+    background-color: #CD7F32;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5), 0 2px 5px rgba(205, 127, 50, 0.5);
+}
+.posicion-icon-wrapper.rank {
+    background-color: #e0e6ed;
+    color: #555;
+    box-shadow: none;
+    font-size: 1.1em;
+}
+
+/* Actividad Reciente */
+.actividad-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.95em;
+}
+.actividad-item:last-child { border-bottom: none; }
+
+.actividad-descripcion {
+    color: #444;
+    font-weight: 600;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-nick {
+    color: #2c3e50;
+    font-weight: 800;
+    font-size: 1.1em;
+    padding: 2px 8px;
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
+    border-radius: 6px;
+    border-left: 3px solid #3498db;
+}
+
+.btn-tipo {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.btn-tipo.reciclaje {
+    background-color: #38c172;
+    color: white;
+}
+
+.btn-tipo.canje {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.actividad-fecha {
+    color: #777;
+    font-size: 0.85em;
+    margin-left: 15px;
+    min-width: 90px;
+    text-align: right;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.ranking-lista.updating {
+    animation: fadeIn 0.5s ease;
+}
+
+/* RESPONSIVE Dashboard */
+@media (max-width: 768px) {
+    .dashboard-grid { grid-template-columns: 1fr; gap: 25px; }
+    .metricas-grid { grid-template-columns: 1fr 1fr; }
+    .ranking-item { flex-wrap: wrap; }
+    .rank-data { width: auto; margin-top: 5px; font-size: 0.9em; }
+    .rank-data.total { margin-left: 10px; }
+    .rank-nick { flex-basis: 100%; margin-left: 15px; }
+}
+
+/* ======================================================================= */
+/* SECCIÓN DE VENTAJAS */
+/* ======================================================================= */
+
+.ventajas-reciclin-ejemplo-wrapper {
+    font-family: 'Inter', sans-serif;
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.ventajas-titulo-ejemplo {
+    font-size: 2.5em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    line-height: 1.2;
+}
+
+.resaltado-verde {
+    background-color: #90EE90;
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.ventajas-grid-ejemplo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.ventaja-card-ejemplo {
+    background-color: #90EE90;
+    width: 180px;
+    height: 250px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.ventaja-card-ejemplo:hover {
+    transform: translateY(-5px);
+}
+
+.ventaja-icon-ejemplo {
+    font-size: 4em;
+    line-height: 1;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    border: 4px solid #2c3e50;
+    border-radius: 50%;
+    padding: 5px 10px;
+    background-color: transparent;
+    font-weight: 100;
+}
+
+.icon-luz { border: none; font-size: 5em; padding: 0; }
+.icon-trofeo { border: none; font-size: 5em; padding: 0; }
+.icon-planeta { border: none; font-size: 5em; padding: 0; }
+.icon-colegio { border: none; font-size: 5em; padding: 0; }
+.icon-manos { border: none; font-size: 5em; padding: 0; }
+
+.ventaja-texto-ejemplo {
+    font-size: 1em;
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.3;
+}
+
+@media (max-width: 650px) {
+    .ventajas-grid-ejemplo {
+        flex-direction: column;
+        align-items: center;
+    }
+    .ventaja-card-ejemplo {
+        width: 80%;
+        height: 200px;
+    }
+    .ventajas-titulo-ejemplo {
+        font-size: 2em;
+    }
+}
+
+/* Continúa en el siguiente bloque... */

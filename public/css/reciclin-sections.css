@@ -1,0 +1,556 @@
+/* ======================================================================= */
+/* FAQ SECTION */
+/* ======================================================================= */
+
+.faq-section-container {
+    width: 100%;
+}
+
+.faq-wrapper {
+    max-width: 1200px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 30px;
+    align-items: start;
+    font-family: 'Inter', sans-serif;
+}
+
+.faq-contenido-area {
+    background: white;
+    border: 3px solid #1a1a1a;
+    border-radius: 20px;
+    padding: 50px 40px;
+    min-height: 550px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.faq-titulo {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 45px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #38c172;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.3;
+}
+
+.faq-step {
+    display: none;
+    animation: fadeInContent 0.5s ease;
+}
+
+.faq-step.active {
+    display: block;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 40px;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.step-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(180deg, #72f2a7 0%, #4ade80 100%);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+}
+
+.step-item:hover::before {
+    transform: scaleY(1);
+}
+
+.step-item:hover {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(114, 242, 167, 0.2);
+}
+
+.step-item.reverse {
+    flex-direction: row-reverse;
+}
+
+.step-icon-illustration-container {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #72f2a7 0%, #4ade80 100%);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    box-shadow: 0 8px 20px rgba(114, 242, 167, 0.35);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.step-icon-illustration-container::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(135deg, #72f2a7, #4ade80);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.step-item:hover .step-icon-illustration-container {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.step-item:hover .step-icon-illustration-container::after {
+    opacity: 0.6;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.3;
+    }
+}
+
+/* Iconos personalizados */
+.icon-registro::before { content: '📝'; }
+.icon-reconocimiento::before { content: '🤖'; }
+.icon-puntos::before { content: '⭐'; }
+.icon-juego::before { content: '🎲'; }
+.icon-retos::before { content: '🥇'; }
+.icon-aprendizaje::before { content: '🧠'; }
+.icon-canje::before { content: '🎁'; }
+.icon-reconocido::before { content: '🌟'; }
+.icon-motivacion::before { content: '🔋'; }
+.icon-guia::before { content: '🧭'; }
+.icon-supervision::before { content: '👁️'; }
+.icon-integracion::before { content: '🔗'; }
+
+.step-text {
+    flex: 1;
+    font-size: 1.05rem;
+    color: #444;
+    line-height: 1.7;
+}
+
+.step-text strong {
+    display: block;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+    font-size: 1.1rem;
+}
+
+.faq-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: sticky;
+    top: 20px;
+}
+
+.faq-boton {
+    background: white;
+    border: 2px solid #e5e5e5;
+    color: #444;
+    padding: 20px 22px;
+    border-radius: 15px;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.faq-boton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(114, 242, 167, 0.15), transparent);
+    transition: left 0.6s ease;
+}
+
+.faq-boton:hover::before {
+    left: 100%;
+}
+
+.faq-boton:hover:not(.active-btn) {
+    border-color: #72f2a7;
+    transform: translateX(8px);
+    box-shadow: 0 5px 15px rgba(114, 242, 167, 0.2);
+}
+
+.faq-boton.active-btn {
+    background: linear-gradient(135deg, #72f2a7 0%, #4ade80 100%);
+    color: #1a1a1a;
+    border-color: #1a1a1a;
+    font-weight: 700;
+    transform: translateX(8px);
+    box-shadow: 0 8px 25px rgba(114, 242, 167, 0.5);
+}
+
+.faq-boton.active-btn::after {
+    content: '→';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Responsive FAQ */
+@media (max-width: 900px) {
+    .faq-wrapper {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        margin: 30px auto;
+    }
+
+    .faq-botones {
+        position: static;
+        order: -1;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .faq-boton {
+        flex: 1 1 calc(50% - 5px);
+        min-width: 150px;
+        padding: 15px;
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
+    .faq-boton.active-btn::after {
+        content: '';
+    }
+
+    .faq-contenido-area {
+        padding: 35px 25px;
+        min-height: auto;
+    }
+
+    .step-item {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 15px;
+        padding: 20px 15px;
+    }
+
+    .step-text {
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .step-icon-illustration-container {
+        width: 80px;
+        height: 80px;
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .faq-wrapper {
+        margin: 20px auto;
+    }
+
+    .faq-botones {
+        flex-direction: column;
+    }
+
+    .faq-boton {
+        flex: 1;
+        width: 100%;
+    }
+
+    .faq-contenido-area {
+        padding: 25px 20px;
+    }
+
+    .faq-titulo {
+        font-size: 1.4rem;
+        margin-bottom: 30px;
+    }
+
+    .step-item {
+        margin-bottom: 30px;
+    }
+
+    .step-icon-illustration-container {
+        width: 70px;
+        height: 70px;
+        font-size: 2.5rem;
+    }
+
+    .step-text {
+        font-size: 0.95rem;
+    }
+
+    .step-text strong {
+        font-size: 1rem;
+    }
+}
+
+/* ======================================================================= */
+/* TARJETAS DE CATEGORÍAS (SMILE AND LEARN) */
+/* ======================================================================= */
+
+.smile-and-learn-component {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px 0;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 1440px;
+}
+
+.smile-and-learn-component * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.smile-and-learn-component .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.smile-and-learn-component h1 {
+    color: #333;
+    text-align: center;
+    font-size: clamp(24px, 5vw, 42px);
+    margin-bottom: 30px;
+    text-shadow: none;
+    line-height: 1.2;
+}
+
+.smile-and-learn-component h1 .highlight {
+    color: #2ECC71;
+    font-weight: 800;
+}
+
+.smile-and-learn-component .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.smile-and-learn-component .filter-btn {
+    padding: 12px 28px;
+    border: 2px solid #667eea;
+    background: transparent;
+    color: #667eea;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.smile-and-learn-component .filter-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.smile-and-learn-component .filter-btn.active {
+    background: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+}
+
+.smile-and-learn-component .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.smile-and-learn-component .card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 280px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+}
+
+.smile-and-learn-component .card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.smile-and-learn-component .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.8) 100%);
+    z-index: 1;
+}
+
+.smile-and-learn-component .card-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+.smile-and-learn-component .card-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #4CAF50;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+.smile-and-learn-component .card.infantil .card-tag { background: #FF6B6B; }
+.smile-and-learn-component .card.primaria .card-tag { background: #4ECDC4; }
+.smile-and-learn-component .card.secundaria .card-tag { background: #764BA2; }
+.smile-and-learn-component .card.inicial .card-tag { background: #FFD166; color: #333; }
+.smile-and-learn-component .card.especial .card-tag { background: #1ABC9C; }
+
+.smile-and-learn-component .card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.smile-and-learn-component .card-title {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    flex: 1;
+}
+
+.smile-and-learn-component .card-arrow {
+    width: 50px;
+    height: 50px;
+    background: #4CAF50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 15px;
+}
+
+.smile-and-learn-component .card:hover .card-arrow {
+    background: #45a049;
+    transform: scale(1.1) rotate(360deg);
+}
+
+.smile-and-learn-component .card-arrow::after {
+    content: '→';
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .smile-and-learn-component .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .smile-and-learn-component .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ======================================================================= */
+/* SECCIÓN DE BOTELLAS */
+/* ======================================================================= */
+
+.bottles-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.bottles-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.bottle img {
+    width: 150px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.bottle img:hover {
+    transform: scale(1.1) rotate(5deg);
+}

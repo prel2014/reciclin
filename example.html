@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclin.com - Un peque heroe</title>
+   <style>
+    /* ---------------------------------------------------------------------- */
+    /* AISLAMIENTO CSS: Todos los estilos usan el selector #barra-reciclin    */
+    /* Esto evita conflictos con otros elementos de tu página web.             */
+    /* ---------------------------------------------------------------------- */
+
+    #barra-reciclin *,
+    #barra-reciclin *::before,
+    #barra-reciclin *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+
+    #barra-reciclin .header {
+        background: linear-gradient(90deg, #1a237e 0%, #1565c0 15%, #0d47a1 100%);
+        padding: 0;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    #barra-reciclin .nav-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        flex-wrap: wrap;
+    }
+
+    /* Contenedor izquierdo: INICIO + JUEGOS/VIDEOS/BLOG/RANKING */
+    #barra-reciclin .left-group {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    #barra-reciclin .inicio-btn {
+        background: #1565c0;
+        color: white;
+        padding: 15px 25px;
+        border: none;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    #barra-reciclin .inicio-btn:hover {
+        background: #0d47a1;
+    }
+
+    /* Contenedor de navegación (Juegos, Videos, Blog, Ranking) */
+    #barra-reciclin .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* ITEMS DE NAVEGACIÓN */
+    #barra-reciclin .nav-item {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 12px;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+
+    #barra-reciclin .nav-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Iconos de navegación */
+    #barra-reciclin .nav-item.juegos::before { content: '🎮'; }
+    #barra-reciclin .nav-item.videos::before { content: '📺'; }
+    #barra-reciclin .nav-item.blog::before { content: '📝'; }
+
+    /* ESTILO PARA RANKING */
+    #barra-reciclin .logo-central {
+        background: linear-gradient(135deg, #5e35b1, #311b92);
+        padding: 8px 20px;
+        border-radius: 50px;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+    #barra-reciclin .logo-central::before { content: '🏆'; font-size: 24px; }
+    #barra-reciclin .logo-central::after { content: '📈'; font-size: 20px; }
+
+
+    /* CONTENEDOR CENTRAL DEL LOGO */
+    #barra-reciclin .centered-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+    }
+    #barra-reciclin .custom-logo {
+        height: 60px; 
+        width: auto;
+        object-fit: contain;
+    }
+
+    /* Contenedor derecho: GRANDES IDEAS + ACCIÓN */
+    #barra-reciclin .right-section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* LOGO DERECHA - Grandes Ideas */
+    #barra-reciclin .brand-logo {
+        background: white;
+        padding: 8px 15px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: bold;
+        color: #1a237e;
+        font-size: 14px;
+    }
+    #barra-reciclin .brand-logo::before { content: '💡'; font-size: 18px; }
+
+    /* ESTILOS DE BOTONES DE ACCIÓN */
+    #barra-reciclin .action-btn {
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        font-size: 13px;
+        color: #1a237e;
+    }
+    #barra-reciclin .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    #barra-reciclin .btn-historietas { background: linear-gradient(135deg, #ff9800, #ff5722); color: white; display: flex; align-items: center; gap: 5px; }
+    #barra-reciclin .btn-historietas::before { content: '📖'; }
+    #barra-reciclin .btn-evidencias { background: linear-gradient(135deg, #66bb6a, #2e7d32); color: white; }
+    #barra-reciclin .btn-sesion { background: linear-gradient(135deg, #29b6f6, #0288d1); color: white; display: flex; align-items: center; gap: 5px; }
+    #barra-reciclin .btn-sesion::before { content: '👤'; }
+
+    #barra-reciclin .search-btn { display: none; }
+
+    #barra-reciclin .mobile-menu {
+        display: none;
+        background: white;
+        color: #1a237e;
+        border: none;
+        padding: 10px 15px;
+        font-size: 24px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #barra-reciclin .mobile-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #0d47a1;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    #barra-reciclin .mobile-nav.active {
+        display: flex;
+    }
+
+    /* Responsive: Ocultar escritorio y mostrar móvil */
+    @media (max-width: 992px) {
+        #barra-reciclin .nav-container {
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        #barra-reciclin .left-group,
+        #barra-reciclin .right-section,
+        #barra-reciclin .centered-logo { 
+            display: none;
+        }
+
+        #barra-reciclin .mobile-menu {
+            display: block;
+        }
+        
+        /* Ajuste de elementos en el menú móvil */
+        #barra-reciclin .mobile-nav .nav-item,
+        #barra-reciclin .mobile-nav .logo-central,
+        #barra-reciclin .mobile-nav .brand-logo,
+        #barra-reciclin .mobile-nav img.custom-logo {
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            margin: 5px 0;
+        }
+        
+        /* LOGO EN MÓVIL AL 100% (ajustado para que sea visible) */
+        #barra-reciclin .mobile-nav img.custom-logo {
+            width: 100%; 
+            max-width: 150px; 
+            height: auto;
+            margin: 15px auto; 
+        }
+    }
+</style>
+
+<div id="barra-reciclin">
+    <header class="header">
+        <nav class="nav-container">
+            <div class="left-group">
+                <button class="inicio-btn">INICIO</button>
+                                
+                <div class="main-nav">
+                    <a href="#" class="nav-item juegos">JUEGOS</a>
+                    <a href="#" class="nav-item videos">VIDEOS</a>
+                    <a href="#" class="nav-item blog">BLOG</a>
+                    
+                    <div class="logo-central">RANKING</div>
+                </div>
+            </div>
+
+            <div class="centered-logo">
+                <img src="https://reciclin.com/imagenes/logo.png" alt="Logo Central" class="custom-logo">
+            </div>
+
+            <div class="right-section">
+                <div class="brand-logo">
+                    <span>Grandes Ideas</span>
+                </div>
+                
+                <button class="action-btn btn-historietas">HISTORIETAS</button>
+                <button class="action-btn btn-evidencias">EVIDENCIAS</button>
+                <button class="action-btn btn-sesion">INICIAR SESIÓN</button>
+                
+                <button class="search-btn">🔍</button>
+            </div>
+
+            <button class="mobile-menu" onclick="toggleMenuReciclin()">☰</button>
+        </nav>
+
+        <div class="mobile-nav" id="mobileNavReciclin">
+            <button class="inicio-btn">INICIO</button>
+            
+            <a href="#" class="nav-item juegos">JUEGOS</a>
+            <a href="#" class="nav-item videos">VIDEOS</a>
+            <a href="#" class="nav-item blog">BLOG</a>
+            
+            <div class="logo-central">RANKING</div>
+            
+            <img src="https://reciclin.com/imagenes/logo.png" alt="Logo Central Móvil" class="custom-logo"> 
+
+            <div class="brand-logo"><span>Grandes Ideas</span></div>
+            
+            <button class="action-btn btn-historietas">HISTORIETAS</button>
+            <button class="action-btn btn-evidencias">EVIDENCIAS</button>
+            <button class="action-btn btn-sesion">INICIAR SESIÓN</button>
+        </div>
+    </header>
+</div>
+<script>
+    // Se renombra la función y los IDs para evitar conflictos con otros scripts
+    function toggleMenuReciclin() {
+        const nav = document.getElementById('mobileNavReciclin');
+        nav.classList.toggle('active');
+    }
+
+    document.addEventListener('click', function(e) {
+        const nav = document.getElementById('mobileNavReciclin');
+        const menuBtn = document.querySelector('#barra-reciclin .mobile-menu');
+                    
+        // Verifica si el clic fue fuera del menú móvil y fuera del botón de menú
+        if (nav && menuBtn && !nav.contains(e.target) && !menuBtn.contains(e.target)) {
+            nav.classList.remove('active');
+        }
+    });
+
+    window.addEventListener('resize', function() {
+        // Cierra el menú móvil si la ventana es redimensionada a tamaño de escritorio
+        if (window.innerWidth > 992) {
+            const nav = document.getElementById('mobileNavReciclin');
+            if (nav) {
+                nav.classList.remove('active');
+            }
+        }
+    });
+</script>
+
+<style>
+        /* [PEGA AQUÍ EL CÓDIGO CSS DE ARRIBA] */
+        .text-block-container {
+            max-width: 800px;
+            margin: 30px auto;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .plataform-text {
+            font-size: 1.5em;
+            margin: 0;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .highlight {
+            background-color: #90EE90;
+            padding: 3px 8px;
+            border-radius: 5px;
+            display: inline-block;
+            white-space: normal;
+        }
+    </style>
+</head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+
+
+<style>
+    /* ======================================================================= */
+    /* ESTILOS DE LA SECCIÓN DE SLIDES DE VIDEOS: CLÁSICO Y BONITO FINAL */
+    /* ======================================================================= */
+    
+    #seccion-videos-slide-final * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #seccion-videos-slide-final {
+        padding: 0;
+        background-color: #121212;
+    }
+
+    /* Contenedor principal y Tarjeta de Video */
+    #seccion-videos-slide-final .swiper-container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    #seccion-videos-slide-final .video-card {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 80vh; /* Altura más cómoda */
+        min-height: 450px;
+        background-color: #000; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #seccion-videos-slide-final .video-card video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        filter: brightness(0.85); /* Menos oscuro, más brillante */
+    }
+
+    /* ======================================================================= */
+    /* OVERLAY Y CONTENIDO (ALINEADO A LA IZQUIERDA Y ABAJO) */
+    /* ======================================================================= */
+    
+    #seccion-videos-slide-final .video-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0; /* Ocupa todo el alto */
+        
+        /* Degradado azul oscuro en la base */
+        background: linear-gradient(
+            to top, 
+            rgba(13, 71, 161, 0.9) 0%,   /* Azul oscuro intenso */
+            rgba(33, 150, 243, 0.3) 50%,  /* Celeste sutil */
+            transparent 90%
+        );
+        color: white;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* Alinea el contenido a la parte inferior */
+        align-items: flex-start; /* Alinea el contenido a la izquierda */
+        padding: 60px 80px; 
+        text-align: left;
+    }
+
+    /* TAG/INSIGNIA (SUBTÍTULO) */
+    #seccion-videos-slide-final .tag {
+        background-color: #00A2E8; /* Azul Brillante */
+        color: white; 
+        padding: 8px 15px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        display: inline-block;
+        letter-spacing: 2px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* TÍTULO PRINCIPAL */
+    #seccion-videos-slide-final h3 {
+        font-size: 3.5vw; /* Tamaño dinámico, pero controlado */
+        min-font-size: 36px;
+        max-width: 900px;
+        margin: 0;
+        line-height: 1.1;
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 1);
+        font-weight: 900;
+        letter-spacing: -1px;
+        text-transform: uppercase;
+    }
+    
+    /* SUBTÍTULO INFERIOR */
+    #seccion-videos-slide-final p.subtitulo {
+        font-size: 18px;
+        margin-top: 10px;
+        max-width: 700px;
+        color: #CFD8DC; /* Gris claro */
+        font-weight: 400;
+        line-height: 1.4;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+    
+
+    /* Animaciones (Se mantienen para un look moderno) */
+    #seccion-videos-slide-final .video-overlay > * {
+        opacity: 0;
+        animation: slideInUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    #seccion-videos-slide-final .tag { animation-delay: 0.2s; }
+    #seccion-videos-slide-final h3 { animation-delay: 0.4s; }
+    #seccion-videos-slide-final p.subtitulo { animation-delay: 0.6s; }
+    
+    @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(20px); filter: blur(3px); }
+        to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+
+    /* ======================================================================= */
+    /* BOTONES DE NAVEGACIÓN Y PAGINACIÓN CLÁSICOS Y BONITOS */
+    /* ======================================================================= */
+    
+    /* Flechas de Navegación */
+    #seccion-videos-slide-final .swiper-button-prev,
+    #seccion-videos-slide-final .swiper-button-next {
+        background-color: #00A2E8; /* Fondo azul */
+        color: #FFFFFF;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        opacity: 0.8;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s ease-in-out;
+        z-index: 10;
+    }
+    
+    #seccion-videos-slide-final .swiper-button-prev:hover,
+    #seccion-videos-slide-final .swiper-button-next:hover {
+        background-color: #0D47A1; /* Azul oscuro al pasar el ratón */
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    
+    #seccion-videos-slide-final .swiper-button-prev::after,
+    #seccion-videos-slide-final .swiper-button-next::after {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* Paginación (puntos) */
+    #seccion-videos-slide-final .swiper-pagination {
+        bottom: 30px !important;
+        left: 0;
+        right: 0;
+        text-align: center; /* Centrar los puntos */
+        z-index: 3;
+    }
+    
+    #seccion-videos-slide-final .swiper-pagination-bullet {
+        background-color: #FFFFFF;
+        opacity: 0.5;
+        width: 10px;
+        height: 10px;
+    }
+    
+    #seccion-videos-slide-final .swiper-pagination-bullet-active {
+        background-color: #00A2E8;
+        opacity: 1;
+        width: 12px;
+        height: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        #seccion-videos-slide-final .video-card {
+            height: 60vh;
+        }
+        #seccion-videos-slide-final .video-overlay {
+            padding: 30px;
+        }
+        #seccion-videos-slide-final h3 {
+            font-size: 28px;
+        }
+        #seccion-videos-slide-final .swiper-button-prev,
+        #seccion-videos-slide-final .swiper-button-next {
+            width: 40px;
+            height: 40px;
+        }
+    }
+</style>
+
+<section id="seccion-videos-slide-final">
+    
+    <div class="swiper-container mySwiperFinal">
+        <div class="swiper-wrapper">
+            
+            <div class="swiper-slide">
+                <div class="video-card">
+                    <video autoplay muted loop playsinline preload="none" 
+                           poster="URL_IMAGEN_DE_PREVIEW.jpeg" 
+                           src="https://reciclin.com/imagenes/video1.mp4">
+                        Tu navegador no soporta el tag de video.
+                    </video>
+                    <div class="video-overlay">
+                        <span class="tag">01 / ESTRENO SEMANAL</span>
+                        <h3>LA AVENTURA DE RECICLIN: MUNDO SOSTENIBLE</h3>
+                        <p class="subtitulo">Acompaña a nuestros héroes en su misión por salvar los océanos y la tierra.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-slide">
+                <div class="video-card">
+                    <video autoplay muted loop playsinline preload="none" 
+                           poster="URL_IMAGEN_DE_PREVIEW_2.jpeg" 
+                           src="https://www.pexels.com/download/video/856863">
+                        Tu navegador no soporta el tag de video.
+                    </video>
+                    <div class="video-overlay">
+                        <span class="tag">02 / ECO-JUEGOS</span>
+                        <h3>DESCUBRE CÓMO CADA GOTA CUENTA EN LA TIERRA</h3>
+                        <p class="subtitulo">Aprende sobre la importancia del agua y cómo podemos conservarla con juegos sencillos.</p>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+        
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+        <div class="swiper-pagination"></div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    let swiperInstance;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        swiperInstance = new Swiper('.mySwiperFinal', {
+            loop: true,
+            slidesPerView: 1, 
+            spaceBetween: 0,
+            allowTouchMove: true, 
+
+            autoplay: {
+                delay: 15000, 
+                disableOnInteraction: false,
+            },
+            
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // Función para sincronizar videos con el cambio de slide
+            on: {
+                init: function () {
+                    iniciarVideoActual(this);
+                },
+                slideChangeTransitionStart: function () {
+                    // Pausa todos los videos
+                    const videos = document.querySelectorAll('#seccion-videos-slide-final video');
+                    videos.forEach(video => {
+                        if (!video.paused) {
+                            video.pause();
+                        }
+                    });
+                },
+                slideChangeTransitionEnd: function () {
+                    // Reproduce el video del slide activo
+                    iniciarVideoActual(this);
+                }
+            }
+        });
+    });
+
+    // Función para encontrar y reproducir el video del slide activo
+    function iniciarVideoActual(swiperInstance) {
+        if (!swiperInstance) return;
+        const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
+        const activeVideo = activeSlide ? activeSlide.querySelector('video') : null;
+
+        if (activeVideo) {
+            activeVideo.currentTime = 0;
+            activeVideo.play().catch(error => {
+                console.log("Autoplay blocked or other error:", error);
+            });
+        }
+    }
+</script>
+<body>
+
+    <div class="text-block-container">
+        <p class="plataform-text">
+           Reciclin.com es una plataforma de reciclaje gamificada creada en la I.E.P. Enrique Pelach y Feliu de Abancay, con un<span class="highlight">robot tacho inteligente</span>
+            que motiva a los estudiantes y colegios a cuidar el planeta jugando y aprendiendo.
+        </p>
+    </div>
+
+  
+
+</body>
+
+    <!-- Sección de Botellas -->
+    <div class="bottles-section">
+        <div class="bottles-container">
+            <div class="bottle">
+                <img src="https://reciclin.com/imagenes/botella1.png" alt="Ícono Reciclaje 1">
+            </div>
+            <div class="bottle">
+                <img src="https://reciclin.com/imagenes/botella2.png" alt="Ícono Reciclaje 2">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Menú hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Slider de videos
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                dots[i].classList.remove('active');
+            });
+
+            if (index >= slides.length) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = slides.length - 1;
+            } else {
+                currentIndex = index;
+            }
+
+            slides[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentIndex + direction);
+        }
+
+        function currentSlide(index) {
+            showSlide(index);
+        }
+
+        // Auto-play del slider (10 segundos)
+        setInterval(() => {
+            changeSlide(1);
+        }, 10000);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ------------------------------------- */
+        /* ESTILOS GENERALES Y ESTRUCTURA */
+        /* ------------------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+        }
+        
+        .dashboard-wrapper {
+            font-family: 'Inter', sans-serif;
+            padding: 30px;
+            box-sizing: border-box;
+            max-width: 1150px;
+            margin: 30px auto;
+            background-color: #f7f9fb;
+            border-radius: 12px;
+            border: 1px solid #e0e6ed;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 30px;
+        }
+
+        /* Títulos Serios */
+        .seccion-titulo {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #38c172;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Estilo de Tarjeta Base */
+        .tarjeta {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f0f0f0;
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Botón Actualizar */
+        .btn-actualizar {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .btn-actualizar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-actualizar:active {
+            transform: translateY(0);
+        }
+
+        .btn-actualizar.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* ------------------------------------- */
+        /* SECCIÓN IZQUIERDA: MÉTRICAS COMUNITARIAS Y RANKING TOP 10 */
+        /* ------------------------------------- */
+        
+        /* Contenedor de las 4 Métricas Comunitarias */
+        .metricas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .metrica-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #ebf9f0;
+            border-radius: 8px;
+            border: 1px solid #d4edda;
+            min-height: 80px;
+        }
+        
+        .metrica-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .metrica-icon {
+            font-size: 1.5em;
+            margin-right: 8px;
+            color: #38c172;
+        }
+
+        .metrica-label {
+            color: #555;
+            font-weight: 600;
+            font-size: 0.8em;
+            text-transform: uppercase;
+        }
+
+        .metrica-valor {
+            font-size: 1.6em;
+            font-weight: 800;
+            color: #2c3e50;
+            line-height: 1.1;
+        }
+        
+        .metrica-card:nth-child(3) .metrica-icon { color: #00bcd4; }
+        .metrica-card:nth-child(4) .metrica-icon { color: #ff9800; }
+
+        /* Estilos del Ranking Top 10 */
+        .ranking-lista { list-style: none; padding: 0; margin: 0; }
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            background-color: #f7f9fb;
+            border-left: 5px solid transparent;
+            transition: all 0.2s ease-in-out;
+        }
+        .ranking-item.destacado { background-color: #e6fff0; border-left-color: #4CAF50; }
+        .ranking-item:hover { background-color: #ebf9f0; border-left-color: #38c172; }
+        
+        .rank-nick { font-weight: 700; color: #2c3e50; flex-grow: 1; min-width: 120px; }
+        .rank-data { font-weight: 800; color: #38c172; font-size: 1em; width: 100px; text-align: right; margin-left: 15px; }
+        .rank-data.total { color: #00bcd4; font-weight: 600; width: 80px; }
+
+        /* Medallas Mejoradas */
+        .posicion-icon-wrapper {
+            width: 35px; height: 35px; margin-right: 15px; line-height: 35px; text-align: center; border-radius: 50%;
+            font-weight: 800; font-size: 0.9em; color: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .posicion-icon-wrapper.gold { 
+            background-color: #FFD700; 
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5), 0 2px 5px rgba(255, 215, 0, 0.5); 
+            color: #333; 
+        }
+        .posicion-icon-wrapper.silver { 
+            background-color: #C0C0C0; 
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5), 0 2px 5px rgba(192, 192, 192, 0.5); 
+        }
+        .posicion-icon-wrapper.bronze { 
+            background-color: #CD7F32; 
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5), 0 2px 5px rgba(205, 127, 50, 0.5); 
+        }
+        .posicion-icon-wrapper.rank { 
+            background-color: #e0e6ed; 
+            color: #555; 
+            box-shadow: none; 
+            font-size: 1.1em; 
+        }
+
+        /* ------------------------------------- */
+        /* SECCIÓN DERECHA: ACTIVIDAD RECIENTE */
+        /* ------------------------------------- */
+        .actividad-item {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px 0; 
+            border-bottom: 1px solid #e9ecef; 
+            font-size: 0.95em;
+        }
+        .actividad-item:last-child { border-bottom: none; }
+        
+        .actividad-descripcion { 
+            color: #444; 
+            font-weight: 600; 
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-nick {
+            color: #2c3e50;
+            font-weight: 800;
+            font-size: 1.1em;
+            padding: 2px 8px;
+            background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
+            border-radius: 6px;
+            border-left: 3px solid #3498db;
+        }
+
+        /* Botones de reciclaje y canje */
+        .btn-tipo {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        .btn-tipo.reciclaje {
+            background-color: #38c172;
+            color: white;
+        }
+
+        .btn-tipo.canje {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .actividad-fecha { 
+            color: #777; 
+            font-size: 0.85em; 
+            margin-left: 15px; 
+            min-width: 90px; 
+            text-align: right; 
+        }
+
+        /* Animación de actualización */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ranking-lista.updating {
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* ------------------------------------- */
+        /* RESPONSIVE (Móviles) */
+        /* ------------------------------------- */
+        @media (max-width: 768px) {
+            .dashboard-grid { grid-template-columns: 1fr; gap: 25px; }
+            .metricas-grid { grid-template-columns: 1fr 1fr; }
+            .ranking-item { flex-wrap: wrap; }
+            .rank-data { width: auto; margin-top: 5px; font-size: 0.9em; }
+            .rank-data.total { margin-left: 10px; }
+            .rank-nick { flex-basis: 100%; margin-left: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+    <div class="dashboard-grid">
+
+        <div>
+            <div class="seccion-titulo">👥 Nuestros Usuarios</div>
+            <div class="tarjeta">
+                
+                <div class="metricas-grid">
+                    
+                    <div class="metrica-card">
+                        <div class="metrica-header">
+                            <span class="metrica-icon">📅</span>
+                            <span class="metrica-label">HOY</span>
+                        </div>
+                        <div class="metrica-valor" id="botellas-hoy-valor">45 BTL</div>
+                    </div>
+
+                    <div class="metrica-card">
+                        <div class="metrica-header">
+                            <span class="metrica-icon">🗓️</span>
+                            <span class="metrica-label">ESTA SEMANA</span>
+                        </div>
+                        <div class="metrica-valor" id="botellas-semana-valor">680 BTL</div>
+                    </div>
+
+                    <div class="metrica-card">
+                        <div class="metrica-header">
+                            <span class="metrica-icon">🌎</span>
+                            <span class="metrica-label">TOTAL HISTÓRICO</span>
+                        </div>
+                        <div class="metrica-valor" id="total-historico-valor">15 850 KGS</div>
+                    </div>
+
+                    <div class="metrica-card">
+                        <div class="metrica-header">
+                            <span class="metrica-icon">🧑‍🤝‍🧑</span>
+                            <span class="metrica-label">USUARIOS ACTIVOS</span>
+                        </div>
+                        <div class="metrica-valor" id="usuarios-activos-valor">1.2 K</div>
+                    </div>
+                </div>
+
+                <!-- Botón Actualizar -->
+                <button class="btn-actualizar" onclick="actualizarRanking()">
+                    <span>🔄</span> Actualizar Ranking
+                </button>
+
+                <div class="seccion-titulo" style="margin-top: 20px; border-bottom: none; font-size: 1.4em;">🥇 Ranking TOP 10</div>
+                <ul class="ranking-lista" id="rankingLista">
+                    
+                    <li style="display: flex; justify-content: space-between; font-size: 0.85em; color: #555; padding: 0 15px 8px 60px; font-weight: 700; text-transform: uppercase;">
+                        <span style="flex-grow: 1;">Usuario</span>
+                        <span style="width: 100px; text-align: right; color: #38c172; font-size: 1.1em; display: flex; align-items: center; justify-content: flex-end; gap: 5px;">
+                            <span style="font-size: 1.3em;">⭐</span> ReciPuntos
+                        </span>
+                        <span style="width: 80px; text-align: right; margin-left: 15px;">Total</span>
+                    </li>
+                    
+                    <li class="ranking-item">
+                        <span class="posicion-icon-wrapper gold">1</span>
+                        <span class="rank-nick">ECOMAX_32</span>
+                        <span class="rank-data">35 200</span>
+                        <span class="rank-data total">480</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="posicion-icon-wrapper silver">2</span>
+                        <span class="rank-nick">GreenMaster</span>
+                        <span class="rank-data">28 910</span>
+                        <span class="rank-data total">395</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="posicion-icon-wrapper bronze">3</span>
+                        <span class="rank-nick">PlanetPro</span>
+                        <span class="rank-data">22 150</span>
+                        <span class="rank-data total">310</span>
+                    </li>
+                    <li class="ranking-item destacado">
+                        <span class="posicion-icon-wrapper rank">4</span>
+                        <span class="rank-nick">**Tú (MiNick)**</span>
+                        <span class="rank-data">15 850</span>
+                        <span class="rank-data total">345</span>
+                    </li>
+                    <li class="ranking-item">
+                        <span class="posicion-icon-wrapper rank">5</span>
+                        <span class="rank-nick">ReciclaYa</span>
+                        <span class="rank-data">14 980</span>
+                        <span class="rank-data total">290</span>
+                    </li>
+                  
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <div class="seccion-titulo">⏳ Actividad Reciente</div>
+            <div class="tarjeta actividad-reciente">
+                
+                <div class="actividad-item">
+                    <span class="actividad-descripcion">
+                        <span class="btn-tipo reciclaje">Botellas</span>
+                        <span class="user-nick">MiNick</span>
+                        <span>registró botellas de plástico</span>
+                    </span>
+                    <span class="actividad-fecha">Hace 2h</span>
+                </div>
+                
+                <div class="actividad-item">
+                    <span class="actividad-descripcion">
+                        <span class="btn-tipo canje">Canje</span>
+                        <span class="user-nick">GreenMaster</span>
+                        <span>canjeó caja de lapiceros</span>
+                    </span>
+                    <span class="actividad-fecha">Ayer 16:30</span>
+                </div>
+                
+                <div class="actividad-item">
+                    <span class="actividad-descripcion">
+                        <span class="btn-tipo reciclaje">Botellas</span>
+                        <span class="user-nick">ECOMAX_32</span>
+                        <span>registró latas de aluminio</span>
+                    </span>
+                    <span class="actividad-fecha">05/Oct</span>
+                </div>
+
+                <div class="actividad-item">
+                    <span class="actividad-descripcion">
+                        <span class="btn-tipo canje">Canje</span>
+                        <span class="user-nick">PlanetPro</span>
+                        <span>canjeó cuaderno ecológico</span>
+                    </span>
+                    <span class="actividad-fecha">01/Oct</span>
+                </div>
+                
+                <div class="actividad-item">
+                    <span class="actividad-descripcion">
+                        <span class="btn-tipo reciclaje">Botellas</span>
+                        <span class="user-nick">ReciclaYa</span>
+                        <span>registró botellas PET</span>
+                    </span>
+                    <span class="actividad-fecha">28/Sep</span>
+                </div>
+                
+                <div class="actividad-item">
+                    <span class="actividad-descripcion">
+                        <span class="btn-tipo canje">Canje</span>
+                        <span class="user-nick">MiNick</span>
+                        <span>canjeó descuento en tienda Eco</span>
+                    </span>
+                    <span class="actividad-fecha">25/Sep</span>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function actualizarRanking() {
+    const btn = document.querySelector('.btn-actualizar');
+    const rankingLista = document.getElementById('rankingLista');
+    
+    // Deshabilitar botón
+    btn.classList.add('loading');
+    btn.innerHTML = '<span>⏳</span> Actualizando...';
+    
+    // Simular actualización (aquí conectarías con tu API)
+    setTimeout(() => {
+        // Añadir animación
+        rankingLista.classList.add('updating');
+        
+        // Datos actualizados simulados
+        const nuevosItems = rankingLista.querySelectorAll('.ranking-item');
+        nuevosItems.forEach(item => {
+            const puntos = item.querySelector('.rank-data:not(.total)');
+            const total = item.querySelector('.rank-data.total');
+            
+            // Incrementar puntos aleatoriamente
+            const puntosActuales = parseInt(puntos.textContent.replace(/\s/g, ''));
+            const totalActual = parseInt(total.textContent);
+            
+            puntos.textContent = (puntosActuales + Math.floor(Math.random() * 500)).toLocaleString('es-ES');
+            total.textContent = totalActual + Math.floor(Math.random() * 10);
+        });
+        
+        // Restaurar botón
+        btn.classList.remove('loading');
+        btn.innerHTML = '<span>✅</span> Actualizado';
+        
+        setTimeout(() => {
+            btn.innerHTML = '<span>🔄</span> Actualizar Ranking';
+            rankingLista.classList.remove('updating');
+        }, 1500);
+        
+    }, 1000);
+}
+</script>
+
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // IDs de los elementos para las nuevas métricas
+        const botellasHoyDisplay = document.getElementById('botellas-hoy-valor');
+        const botellasSemanaDisplay = document.getElementById('botellas-semana-valor');
+        const totalHistoricoDisplay = document.getElementById('total-historico-valor');
+        const usuariosActivosDisplay = document.getElementById('usuarios-activos-valor');
+
+        // Valores de ejemplo de las métricas comunitarias
+        const botellasHoy = 45;
+        const botellasSemana = 680;
+        const totalHistorico = 15850;
+        const usuariosActivos = 1200;
+        
+        // Función para formatear el número
+        function formatNumber(num, suffix = '') {
+            if (num >= 1000) {
+                // Formato K (miles)
+                return (num / 1000).toFixed(1).replace('.', ',') + ' K'; 
+            }
+            // Formato con espacio como separador de miles
+            return num.toLocaleString('es-ES').replace(/,/g, ' ') + suffix;
+        }
+        
+        // Asignamos los valores a las métricas
+        botellasHoyDisplay.textContent = formatNumber(botellasHoy, ' BTL');
+        botellasSemanaDisplay.textContent = formatNumber(botellasSemana, ' BTL');
+        totalHistoricoDisplay.textContent = formatNumber(totalHistorico, ' KGS');
+        usuariosActivosDisplay.textContent = formatNumber(usuariosActivos);
+    });
+</script>
+<style>
+    /* ------------------------------------- */
+    /* ESTILOS DE LA SECCIÓN DE VENTAJAS (EJEMPLO) */
+    /* ------------------------------------- */
+    .ventajas-reciclin-ejemplo-wrapper {
+        font-family: 'Inter', sans-serif;
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .ventajas-titulo-ejemplo {
+        font-size: 2.5em;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        line-height: 1.2;
+    }
+
+    /* Resaltado como en el ejemplo */
+    .resaltado-verde {
+        background-color: #90EE90; /* Verde claro similar al ejemplo */
+        padding: 2px 10px;
+        border-radius: 8px;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .ventajas-grid-ejemplo {
+        display: flex;
+        flex-wrap: wrap; /* Para que funcione en 5 tarjetas */
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .ventaja-card-ejemplo {
+        background-color: #90EE90; /* Fondo de tarjeta verde claro */
+        width: 180px; /* Ancho fijo similar al ejemplo */
+        height: 250px;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    .ventaja-card-ejemplo:hover {
+        transform: translateY(-5px); /* Pequeño efecto al pasar el mouse */
+    }
+
+    .ventaja-icon-ejemplo {
+        font-size: 4em;
+        line-height: 1;
+        color: #2c3e50; /* Icono gris oscuro, como en el ejemplo */
+        margin-bottom: 20px;
+        /* Estilo de línea (outline) para simular el icono */
+        border: 4px solid #2c3e50;
+        border-radius: 50%;
+        padding: 5px 10px;
+        background-color: transparent;
+        font-weight: 100; /* Hace que el texto se vea como un contorno */
+    }
+    /* Iconos usando emojis (para simplicidad) */
+    .icon-luz { border: none; font-size: 5em; padding: 0; }
+    .icon-trofeo { border: none; font-size: 5em; padding: 0; }
+    .icon-planeta { border: none; font-size: 5em; padding: 0; }
+    .icon-colegio { border: none; font-size: 5em; padding: 0; }
+    .icon-manos { border: none; font-size: 5em; padding: 0; }
+
+
+    .ventaja-texto-ejemplo {
+        font-size: 1em;
+        font-weight: 600;
+        color: #2c3e50;
+        line-height: 1.3;
+    }
+
+    /* Responsive: en móvil se apilan */
+    @media (max-width: 650px) {
+        .ventajas-grid-ejemplo {
+            flex-direction: column;
+            align-items: center;
+        }
+        .ventaja-card-ejemplo {
+            width: 80%;
+            height: 200px;
+        }
+        .ventajas-titulo-ejemplo {
+            font-size: 2em;
+        }
+    }
+</style>
+
+<div class="ventajas-reciclin-ejemplo-wrapper">
+    
+    <h2 class="ventajas-titulo-ejemplo">
+        Participar en Reciclín tiene <span class="resaltado-verde">muchas ventajas</span>:
+    </h2>
+
+    <div class="ventajas-grid-ejemplo">
+        
+        <div class="ventaja-card-ejemplo">
+            <span class="ventaja-icon-ejemplo icon-trofeo">🏆</span>
+            <div class="ventaja-texto-ejemplo">
+                Gana puntos y accede a premios exclusivos
+            </div>
+        </div>
+        
+        <div class="ventaja-card-ejemplo">
+            <span class="ventaja-icon-ejemplo icon-luz">💡</span>
+            <div class="ventaja-texto-ejemplo">
+                Fomenta el aprendizaje creativo en el aula
+            </div>
+        </div>
+        
+        <div class="ventaja-card-ejemplo">
+            <span class="ventaja-icon-ejemplo icon-planeta">🌎</span>
+            <div class="ventaja-texto-ejemplo">
+                Genera un impacto positivo en el medio ambiente
+            </div>
+        </div>
+        
+        <div class="ventaja-card-ejemplo">
+            <span class="ventaja-icon-ejemplo icon-colegio">🏫</span>
+            <div class="ventaja-texto-ejemplo">
+                Promueve el liderazgo ecológico en tu colegio
+            </div>
+        </div>
+        
+        <div class="ventaja-card-ejemplo">
+            <span class="ventaja-icon-ejemplo icon-manos">🖐️</span>
+            <div class="ventaja-texto-ejemplo">
+                Ayuda a crear hábitos de reciclaje a los niños
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="faq-section-container">
+    <style>
+        /* IMPORTANTE: Incluye el enlace a la fuente Inter en el <head> de tu página */
+        /* <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"> */
+        
+        /* === ESTILOS ESPECÍFICOS DE LA SECCIÓN FAQ === */
+
+        .faq-section-container {
+            /* Estilos opcionales para centrar la sección si es necesario */
+            width: 100%;
+            /* Puedes ajustar el padding superior/inferior si el margin del wrapper no es suficiente */
+        }
+        
+        .faq-wrapper {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 30px;
+            align-items: start;
+            /* Usar font-family si el body global no lo define */
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ===== TARJETA PRINCIPAL (ÁREA DE CONTENIDO) ===== */
+        .faq-contenido-area {
+            background: white;
+            border: 3px solid #1a1a1a;
+            border-radius: 20px;
+            padding: 50px 40px;
+            min-height: 550px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .faq-titulo {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 45px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.3;
+        }
+
+        /* ===== TABS DE CONTENIDO Y ANIMACIÓN ===== */
+        .faq-step {
+            display: none;
+            animation: fadeInContent 0.5s ease;
+        }
+
+        .faq-step.active {
+            display: block;
+        }
+
+        @keyframes fadeInContent {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== ITEMS CON ICONOS (Step Item) ===== */
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(180deg, #72f2a7 0%, #4ade80 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .step-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .step-item:hover {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(114, 242, 167, 0.2);
+        }
+
+        .step-item.reverse {
+            flex-direction: row-reverse;
+        }
+
+        /* ===== CONTENEDORES DE ICONOS (Visuales) ===== */
+        .step-icon-illustration-container {
+            width: 90px;
+            height: 90px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #72f2a7 0%, #4ade80 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            box-shadow: 0 8px 20px rgba(114, 242, 167, 0.35);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .step-icon-illustration-container::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(135deg, #72f2a7, #4ade80);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .step-item:hover .step-icon-illustration-container {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .step-item:hover .step-icon-illustration-container::after {
+            opacity: 0.6;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.3;
+            }
+        }
+
+        /* === Íconos personalizados para cada paso === */
+        /* Seccion 1: Registro */
+        .icon-registro::before { content: '📝'; }
+        .icon-reconocimiento::before { content: '🤖'; }
+        .icon-puntos::before { content: '⭐'; }
+
+        /* Seccion 2: Gamificación */
+        .icon-juego::before { content: '🎲'; }
+        .icon-retos::before { content: '🥇'; }
+        .icon-aprendizaje::before { content: '🧠'; }
+
+        /* Seccion 3: Canje */
+        .icon-canje::before { content: '🎁'; }
+        .icon-reconocido::before { content: '🌟'; }
+        .icon-motivacion::before { content: '🔋'; }
+
+        /* Seccion 4: Docentes */
+        .icon-guia::before { content: '🧭'; }
+        .icon-supervision::before { content: '👁️'; }
+        .icon-integracion::before { content: '🔗'; }
+        
+        /* ===== TEXTO DE ITEMS ===== */
+        .step-text {
+            flex: 1;
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .step-text strong {
+            display: block;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+            font-size: 1.1rem;
+        }
+
+        /* ===== BOTONES LATERALES (Navegación) ===== */
+        .faq-botones {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: sticky;
+            top: 20px;
+        }
+
+        .faq-boton {
+            background: white;
+            border: 2px solid #e5e5e5;
+            color: #444;
+            padding: 20px 22px;
+            border-radius: 15px;
+            text-align: left;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-boton::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(114, 242, 167, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .faq-boton:hover::before {
+            left: 100%;
+        }
+
+        .faq-boton:hover:not(.active-btn) {
+            border-color: #72f2a7;
+            transform: translateX(8px);
+            box-shadow: 0 5px 15px rgba(114, 242, 167, 0.2);
+        }
+
+        .faq-boton.active-btn {
+            background: linear-gradient(135deg, #72f2a7 0%, #4ade80 100%);
+            color: #1a1a1a;
+            border-color: #1a1a1a;
+            font-weight: 700;
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(114, 242, 167, 0.5);
+        }
+
+        .faq-boton.active-btn::after {
+            content: '→';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* ===== RESPONSIVE (Media Queries) ===== */
+        @media (max-width: 900px) {
+            .faq-wrapper {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 30px auto;
+            }
+
+            .faq-botones {
+                position: static;
+                order: -1;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .faq-boton {
+                flex: 1 1 calc(50% - 5px);
+                min-width: 150px;
+                padding: 15px;
+                font-size: 0.85rem;
+                text-align: center;
+            }
+
+            .faq-boton.active-btn::after {
+                content: '';
+            }
+
+            .faq-contenido-area {
+                padding: 35px 25px;
+                min-height: auto;
+            }
+
+            .step-item {
+                flex-direction: column !important;
+                text-align: center;
+                gap: 15px;
+                padding: 20px 15px;
+            }
+
+            .step-text {
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .step-icon-illustration-container {
+                width: 80px;
+                height: 80px;
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .faq-wrapper {
+                margin: 20px auto;
+            }
+
+            .faq-botones {
+                flex-direction: column;
+            }
+
+            .faq-boton {
+                flex: 1;
+                width: 100%;
+            }
+
+            .faq-contenido-area {
+                padding: 25px 20px;
+            }
+
+            .faq-titulo {
+                font-size: 1.4rem;
+                margin-bottom: 30px;
+            }
+
+            .step-item {
+                margin-bottom: 30px;
+            }
+
+            .step-icon-illustration-container {
+                width: 70px;
+                height: 70px;
+                font-size: 2.5rem;
+            }
+
+            .step-text {
+                font-size: 0.95rem;
+            }
+
+            .step-text strong {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .faq-contenido-area {
+                padding: 20px 15px;
+            }
+
+            .step-item {
+                padding: 15px 10px;
+            }
+
+            .step-icon-illustration-container {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+
+    <div class="faq-wrapper">
+        <div class="faq-contenido-area">
+            <h2 class="faq-titulo" id="faq-main-title">🧾 1. ¿Cómo funciona el registro?</h2>
+            
+            <div class="faq-step active" id="tab-registro">
+                <div class="step-item">
+                    <div class="step-icon-illustration-container icon-registro"></div>
+                    <div class="step-text">
+                        <strong>Registro en Plataforma:</strong>
+                        Los estudiantes se registran con su nombre y grado en la plataforma Reciclin.com.
+                    </div>
+                </div>
+                
+                <div class="step-item reverse">
+                    <div class="step-icon-illustration-container icon-reconocimiento"></div>
+                    <div class="step-text">
+                        <strong>Reconocimiento:</strong>
+                        Cada vez que depositan una botella plástica en el robot tacho inteligente, el sistema reconoce el material reciclado.
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-icon-illustration-container icon-puntos"></div>
+                    <div class="step-text">
+                        <strong>Suma Automática:</strong>
+                        Automáticamente, Reciclín suma los Recipuntos del estudiante en su perfil personal, que podrá visualizar desde la web o aplicación.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-step" id="tab-gamificacion">
+                <div class="step-item">
+                    <div class="step-icon-illustration-container icon-juego"></div>
+                    <div class="step-text">
+                        <strong>Reciclaje como Juego:</strong>
+                        El proyecto convierte el reciclaje en un juego educativo, donde los niños ganan puntos por sus buenas acciones ecológicas.
+                    </div>
+                </div>
+                
+                <div class="step-item reverse">
+                    <div class="step-icon-illustration-container icon-retos"></div>
+                    <div class="step-text">
+                        <strong>Competencia y Equipo:</strong>
+                        Cada reto o actividad se transforma en una experiencia divertida que promueve la competencia sana y el trabajo en equipo.
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-icon-illustration-container icon-aprendizaje"></div>
+                    <div class="step-text">
+                        <strong>Conciencia Ambiental:</strong>
+                        Aprendizaje sobre cuidado ambiental, responsabilidad y sostenibilidad mientras disfrutan de una experiencia digital motivadora.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-step" id="tab-canje">
+                <div class="step-item">
+                    <div class="step-icon-illustration-container icon-canje"></div>
+                    <div class="step-text">
+                        <strong>Canje en Recitienda:</strong>
+                        Los Recipuntos acumulados pueden canjearse en la Recitienda, donde se ofrecen útiles escolares y premios ecológicos.
+                    </div>
+                </div>
+                
+                <div class="step-item reverse">
+                    <div class="step-icon-illustration-container icon-reconocido"></div>
+                    <div class="step-text">
+                        <strong>Reconocimiento Público:</strong>
+                        Los estudiantes más comprometidos son reconocidos públicamente como ejemplo de buenas prácticas ambientales.
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-icon-illustration-container icon-motivacion"></div>
+                    <div class="step-text">
+                        <strong>Fomento Continuo:</strong>
+                        Este sistema de recompensas fortalece la motivación y el compromiso con el reciclaje continuo y sostenible.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-step" id="tab-docentes">
+                <div class="step-item">
+                    <div class="step-icon-illustration-container icon-guia"></div>
+                    <div class="step-text">
+                        <strong>Guía Educativa:</strong>
+                        Los docentes acompañan el proceso guiando a los estudiantes en actividades educativas sobre el reciclaje y el cuidado del medio ambiente.
+                    </div>
+                </div>
+                
+                <div class="step-item reverse">
+                    <div class="step-icon-illustration-container icon-supervision"></div>
+                    <div class="step-text">
+                        <strong>Supervisión y Uso Correcto:</strong>
+                        Supervisan el uso correcto del robot y promueven la participación equitativa de todos los niños.
+                    </div>
+                </div>
+                
+                <div class="step-item">
+                    <div class="step-icon-illustration-container icon-integracion"></div>
+                    <div class="step-text">
+                        <strong>Integración Curricular:</strong>
+                        Además, integran el proyecto en áreas como Ciencia, Ciudadanía y Tecnología, reforzando aprendizajes significativos.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-botones">
+            <div class="faq-boton active-btn" data-target="tab-registro" data-title="🧾 1. ¿Cómo funciona el registro?">
+                🧾 1. ¿Cómo funciona el registro?
+            </div>
+            <div class="faq-boton" data-target="tab-gamificacion" data-title="🎮 2. Gamificación y Aprendizaje">
+                🎮 2. Gamificación y Aprendizaje
+            </div>
+            <div class="faq-boton" data-target="tab-canje" data-title="🏆 3. Canje y Reconocimiento">
+                🏆 3. Canje y Reconocimiento
+            </div>
+            <div class="faq-boton" data-target="tab-docentes" data-title="👩‍🏫 4. Rol de los Docentes">
+                👩‍🏫 4. Rol de los Docentes
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Revisa si el contenedor del FAQ está presente antes de ejecutar
+            if (document.querySelector('.faq-section-container')) {
+                const buttons = document.querySelectorAll('.faq-boton');
+                const contents = document.querySelectorAll('.faq-step');
+                const mainTitle = document.getElementById('faq-main-title');
+
+                function activateTab(button) {
+                    const targetId = button.getAttribute('data-target');
+                    const newTitle = button.getAttribute('data-title');
+
+                    // Remover clases activas
+                    buttons.forEach(btn => btn.classList.remove('active-btn'));
+                    contents.forEach(content => content.classList.remove('active'));
+
+                    // Activar nuevo tab
+                    button.classList.add('active-btn');
+                    const targetContent = document.getElementById(targetId);
+                    
+                    if (targetContent) {
+                        setTimeout(() => {
+                            targetContent.classList.add('active');
+                        }, 50);
+                    }
+                    
+                    // Actualizar título
+                    if (mainTitle && newTitle) {
+                        mainTitle.textContent = newTitle;
+                    }
+                }
+
+                // Event listeners
+                buttons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        activateTab(button);
+                    });
+                });
+
+                // Inicializar título
+                const initialActiveBtn = document.querySelector('.faq-boton.active-btn');
+                if (initialActiveBtn) {
+                    mainTitle.textContent = initialActiveBtn.getAttribute('data-title');
+                }
+            }
+        });
+    </script>
+</div><style>
+    /* Estilos del contenedor principal (totalmente transparente) */
+    .smile-and-learn-component {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px 0; 
+        overflow: hidden; 
+        border-radius: 10px;
+        margin: 20px auto; 
+        max-width: 1440px; 
+    }
+
+    /* Reseteo SCCOPED para evitar conflictos */
+    .smile-and-learn-component * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .smile-and-learn-component .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px; 
+    }
+
+    /* Título y Resaltado Verde */
+    .smile-and-learn-component h1 {
+        color: #333; 
+        text-align: center;
+        font-size: clamp(24px, 5vw, 42px);
+        margin-bottom: 30px;
+        text-shadow: none; 
+        line-height: 1.2;
+    }
+    
+    .smile-and-learn-component h1 .highlight {
+        color: #2ECC71; /* Verde Ambiental */
+        font-weight: 800; 
+    }
+
+    .smile-and-learn-component .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 40px;
+    }
+
+    /* Botones: Colores ajustados para fondo blanco */
+    .smile-and-learn-component .filter-btn {
+        padding: 12px 28px;
+        border: 2px solid #667eea; 
+        background: transparent;
+        color: #667eea; 
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .smile-and-learn-component .filter-btn:hover {
+        background: #667eea;
+        color: white; 
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .smile-and-learn-component .filter-btn.active {
+        background: #4CAF50;
+        border-color: #4CAF50;
+        color: white; 
+    }
+
+    .smile-and-learn-component .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .smile-and-learn-component .card {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        height: 280px;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        border: 1px solid #eee; 
+    }
+
+    .smile-and-learn-component .card:hover {
+        transform: translateY(-5px) scale(1.01);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .smile-and-learn-component .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.8) 100%); 
+        z-index: 1;
+    }
+
+    .smile-and-learn-component .card-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background-size: cover;
+        background-position: center;
+    }
+
+    /* Colores personalizados para las categorías */
+    .smile-and-learn-component .card-tag {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: #4CAF50;
+        color: white;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        z-index: 2;
+    }
+    
+    .smile-and-learn-component .card.infantil .card-tag { background: #FF6B6B; } 
+    .smile-and-learn-component .card.primaria .card-tag { background: #4ECDC4; }
+    .smile-and-learn-component .card.secundaria .card-tag { background: #764BA2; }
+    .smile-and-learn-component .card.inicial .card-tag { background: #FFD166; color: #333; }
+    .smile-and-learn-component .card.especial .card-tag { background: #1ABC9C; }
+
+    .smile-and-learn-component .card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 25px;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .smile-and-learn-component .card-title {
+        color: white;
+        font-size: 24px;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        flex: 1;
+    }
+
+    .smile-and-learn-component .card-arrow {
+        width: 50px;
+        height: 50px;
+        background: #4CAF50;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        margin-left: 15px;
+    }
+
+    .smile-and-learn-component .card:hover .card-arrow {
+        background: #45a049;
+        transform: scale(1.1) rotate(360deg);
+    }
+
+    .smile-and-learn-component .card-arrow::after {
+        content: '→';
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* Media Queries (Responsive) */
+    @media (max-width: 768px) {
+        .smile-and-learn-component .cards-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        /* ... el resto de media queries se mantienen ... */
+    }
+
+    @media (max-width: 480px) {
+        .smile-and-learn-component .cards-grid {
+            grid-template-columns: 1fr;
+        }
+        /* ... el resto de media queries se mantienen ... */
+    }
+</style>
+
+<div class="smile-and-learn-component">
+    <div class="container">
+        <h1>Pequeños artistas con <span class="highlight">grandes ideas</span></h1>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">VER TODO</button>
+            <button class="filter-btn" data-filter="inicial">INICIAL</button>
+            <button class="filter-btn" data-filter="infantil">INFANTIL</button>
+            <button class="filter-btn" data-filter="primaria">PRIMARIA</button>
+            <button class="filter-btn" data-filter="secundaria">SECUNDARIA</button>
+            <button class="filter-btn" data-filter="especial">ESPECIAL</button>
+        </div>
+
+        <div class="cards-grid" id="cardsGrid"></div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const cardsData = [
+            // SÓLO 6 TARJETAS EN TOTAL
+            {
+                category: 'inicial',
+                title: 'Aprende colores y formas',
+                bg: '#FFD166' 
+            },
+            {
+                category: 'infantil',
+                title: 'Una montaña de ideas',
+                bg: '#7b9d6f'
+            },
+            {
+                category: 'primaria',
+                title: 'Ecopalabra',
+                bg: '#9b9b9b'
+            },
+            {
+                category: 'secundaria',
+                title: 'Introducción a la Biología',
+                bg: '#764BA2' 
+            },
+            {
+                category: 'especial',
+                title: 'Taller de Emociones (TEA)',
+                bg: '#1ABC9C' 
+            },
+            {
+                category: 'infantil', // Tarjeta extra para completar las 6
+                title: 'Mis primeros números',
+                bg: '#EBEBEB'
+            }
+        ];
+
+        const component = document.querySelector('.smile-and-learn-component');
+        if (!component) return; 
+
+        const cardsGrid = component.querySelector('#cardsGrid');
+        const filterBtns = component.querySelectorAll('.filter-btn');
+
+        function createCard(card) {
+            return `
+                <div class="card ${card.category}" data-category="${card.category}">
+                    <div class="card-bg" style="background-color: ${card.bg};"></div>
+                    <div class="card-tag">${card.category.toUpperCase()}</div>
+                    <div class="card-content">
+                        <h3 class="card-title">${card.title}</h3>
+                        <div class="card-arrow"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCards(filter = 'all') { 
+            const filteredCards = filter === 'all' 
+                ? cardsData 
+                : cardsData.filter(card => card.category === filter);
+            
+            cardsGrid.innerHTML = filteredCards.map(card => createCard(card)).join('');
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                renderCards(filter);
+            });
+        });
+
+        // Renderizado inicial con 'all'
+        renderCards('all');
+
+        // Animación de click
+        cardsGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            if (card) {
+                card.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                }, 200);
+            }
+        });
+    })();
+</script>
+</html>
